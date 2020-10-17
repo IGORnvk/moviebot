@@ -7,7 +7,7 @@ films = dict()
 
 bot = TeleBot('1015483974:AAFiuGMQB1CewhRP4JFbamvUZBjP9z3ytmw')
 library = FilmLibrary()
-
+library.read_films_from_file()
 
 @bot.message_handler(commands=['start'])
 def hello(message):
