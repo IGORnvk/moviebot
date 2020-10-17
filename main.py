@@ -44,4 +44,23 @@ def get_film_list(message):
     bot.send_message(message.from_user.id, a)
 
 
+@bot.message_handler(commands='fav')
+def favourites(message):
+    a = ''
+    for film in library.get_favourite_list():
+        a += str(film)
+        a += '\n'
+    bot.send_message(message.from_user.id, a)
+
+@bot.message_handler(commands='add_fav')
+def add_favourite_film(message):
+    bot.send_message(message.from_user.id, 'Введите название фильма')
+    bot.register_next_step_handler(message, get_favourite_name)
+
+def get_favourite_name(message):
+    global film_name
+    film_name = message.text
+    library.set_favourite(film_name)
+
+
 bot.polling()
